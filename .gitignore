@@ -1,22 +1,92 @@
-### AL ###
-#Template for AL projects for Dynamics 365 Business Central
-#launch.json folder
+# General
+.DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.vs/
+# .NET
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+TestResults/
+*.vspscc
+*.vssscc
+*.pdb
+*.cache
+*.dbmdl
+*.bak
+*.backup
+*.mdf
+*.ldf
+*.ndf
+*.publish.xml
+*.psess
+*.vsp
+*.vsmdi
+*.testsettings
+*.vspscc
+*.vssscc
+_ReSharper*/
+*.ncrunch*
+*.localhistory/
+.vs/
+*.sln.ide
+
+# Node/Angular
+node_modules/
+dist/
+out-tsc/
+.angular/cache/
+.angular/config.json
+coverage/
+tmp/
+temp/
+package-lock.json
+yarn.lock
+env/
+.env
+.env.*
+
+# IDE/Editor
+.idea/
 .vscode/
-#Cache folder
-.alcache/
-#Symbols folder
-.alpackages/
-#Snapshots folder
-.snapshots/
-#Testing Output folder
-.output/
-#Extension App-file
-*.app
-#Rapid Application Development File
-rad.json
-#Translation Base-file
-*.g.xlf
-#License-file
-*.flf
-#Test results file
-TestResults.xml
+*.sublime*
+*.code-workspace
+.history/
+
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Others
+*.swp
+*.swo
+*.tmp
+*.bak
+*.orig
+*.rej
+*.log
+*.pid
+*.seed
+*.pid.lock
+*.tgz
+*.gz
+*.zip
+*.tar
+*.rar
+*.7z
+
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+__MACOSX/

@@ -1,0 +1,9 @@
+**/.dockerignore
+**/.env
+**/.git
+**/.gitignore
+**/bin/
+**/obj/
+**/node_modules/
+**/dist/
+README.md

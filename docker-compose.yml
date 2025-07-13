@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # The .NET Backend API Service
+  api:
+    container_name: hyperspace-api
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    ports:
+      - "5000:8080"
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - DatabaseSettings__ConnectionString=Host=db;Port=5432;Database=hyperspacedb;Username=hyperspaceadmin;Password=supersecretpassword
+    networks:
+      - hyperspace-net
+
+  # The Angular Frontend Client Service
+  client:
+    container_name: hyperspace-client
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+    networks:
+      - hyperspace-net
+
+  # The PostgreSQL Database Service
+  db:
+    container_name: hyperspace-db
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=hyperspaceadmin
+      - POSTGRES_PASSWORD=supersecretpassword
+      - POSTGRES_DB=hyperspacedb
+    volumes:
+      - hyperspace-db-data:/var/lib/postgresql/data
+    networks:
+      - hyperspace-net
+
+networks:
+  hyperspace-net:
+    driver: bridge
+
+volumes:
+  hyperspace-db-data:
