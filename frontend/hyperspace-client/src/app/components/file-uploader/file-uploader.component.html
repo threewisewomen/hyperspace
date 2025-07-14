@@ -1,1 +1,20 @@
-<p>file-uploader works!</p>
+<div
+  class="border-2 border-dashed border-gray-400 rounded-lg p-8 text-center cursor-pointer hover:border-blue-500 hover:bg-gray-50 transition-colors"
+  (click)="fileInput.click()">
+  
+  <input #fileInput type="file" (change)="onFileSelected($event)" class="hidden" [disabled]="isLoading" />
+  
+  <mat-icon class="scale-[2] text-gray-500 mb-2">
+    {{ isLoading ? 'hourglass_top' : 'upload_file' }}
+  </mat-icon>
+  
+  <p class="text-gray-600 font-semibold">{{ statusMessage }}</p>
+
+  <div *ngIf="isLoading" class="mt-4">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  
+  <div *ngIf="errorMessage" class="text-red-500 mt-2">
+    Error: {{ errorMessage }}
+  </div>
+</div>

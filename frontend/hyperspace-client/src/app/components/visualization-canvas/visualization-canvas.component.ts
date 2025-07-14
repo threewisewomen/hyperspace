@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild, Input, SimpleChanges, OnChanges } from '@angular/core';
 import * as THREE from 'three';
-// @ts-ignore
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 @Component({
   selector: 'app-visualization-canvas',
   template: '<canvas #canvasElement class="w-full h-full"></canvas>',

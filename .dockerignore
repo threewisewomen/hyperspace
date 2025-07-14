@@ -1,9 +1,25 @@
-**/.dockerignore
-**/.env
-**/.git
-**/.gitignore
+# Git
+.git
+.gitignore
+
+# Docker
+.dockerignore
+
+# IDE / OS
+.vscode
+.idea
+.DS_Store
+*.swp
+
+# Logs
+*.log
+npm-debug.log*
+
+# .NET Build artifacts
 **/bin/
 **/obj/
-**/node_modules/
+
+# Angular Build artifacts
 **/dist/
-README.md
+**/tmp/
+/frontend/hyperspace-client/node_modules/

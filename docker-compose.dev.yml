@@ -1,0 +1,61 @@
+# Note: The 'version' tag at the top has been removed as it's obsolete.
+
+services:
+  # The .NET Backend API Service
+  api:
+    container_name: hyperspace-api-dev # Suffix with -dev for clarity
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    ports:
+      - "5000:8080"
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - DatabaseSettings__ConnectionString=Host=db;Port=5432;Database=hyperspacedb;Username=hyperspaceadmin;Password=supersecretpassword
+    networks:
+      - hyperspace-net
+
+  # The Angular Frontend (Development Mode with ng serve)
+  client:
+    container_name: hyperspace-client-dev
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile.dev
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontend/hyperspace-client:/app
+      - /app/node_modules
+    depends_on:
+      - api
+    networks:
+      - hyperspace-net
+    user: root
+
+  # The PostgreSQL Database Service
+  db:
+    container_name: hyperspace-db-dev # Suffix with -dev for clarity
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=hyperspaceadmin
+      - POSTGRES_PASSWORD=supersecretpassword
+      - POSTGRES_DB=hyperspacedb
+    volumes:
+      - hyperspace-db-data-dev:/var/lib/postgresql/data # Use a dev-specific volume
+    networks:
+      - hyperspace-net
+
+# This is the crucial network DEFINITION block. It defines the "hyperspace-net"
+# that all the services above refer to. It MUST be at the root level.
+networks:
+  hyperspace-net:
+    driver: bridge
+
+# This is the volume DEFINITION block.
+volumes:
+  hyperspace-db-data-dev: # Use a dev-specific volume

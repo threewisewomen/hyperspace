@@ -1,0 +1,18 @@
+# Use a full Node image that has all the tools needed for 'ng serve'
+FROM node:20
+WORKDIR /app
+
+# We need to install the Angular CLI globally inside the container
+RUN npm install -g @angular/cli
+
+# Copy package files
+COPY frontend/hyperspace-client/package*.json ./
+RUN npm install
+
+# Copy the rest of the source code
+COPY frontend/hyperspace-client/ .
+
+# The command that will be run when the container starts.
+# We are telling Vite/ng-serve: "Even though you are running inside a container,
+# the browser will be connecting to you via 'localhost:4200'."
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200", "--public-host", "localhost", "--poll", "1000"]
