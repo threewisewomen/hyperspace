@@ -1,24 +1,6 @@
-<div class="h-screen flex flex-col bg-gray-100">
-  <mat-toolbar color="primary" class="flex-shrink-0 shadow-md">
-    <span>Project Hyperspace - EEG Visualization Engine</span>
-  </mat-toolbar>
-
-  <div class="flex-grow p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-    <!-- Control Panel Column -->
-    <div class="md:col-span-1">
-      <mat-card class="p-4">
-        <h2 class="text-xl font-semibold mb-4">Controls</h2>
-        <!-- The uploader now works independently via the service -->
-        <app-file-uploader></app-file-uploader>
-      </mat-card>
-    </div>
-
-    <!-- Visualization Column -->
-    <div class="md:col-span-2">
-      <mat-card class="h-full">
-        <!-- The canvas is still bound to the property in app.component.ts -->
-        <app-visualization-canvas [vertices]="currentVertices"></app-visualization-canvas>
-      </mat-card>
-    </div>
-  </div>
-</div>
+<!-- The router outlet will display our pages (e.g., HomeComponent, VisualizerComponent) -->
+<router-outlet></router-outlet>
+    
+<!-- The dock component sits on top of everything and is always visible -->
+<!-- It gets its [items] data from the dockItems property in our app.component.ts -->
+<app-dock [items]="dockItems"></app-dock>

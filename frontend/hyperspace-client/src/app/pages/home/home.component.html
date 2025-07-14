@@ -1,0 +1,20 @@
+<!-- The background canvas component will cover the entire screen behind everything else -->
+<app-background-canvas 
+  [speed]="2.5" 
+  [scale]="1.2"
+  color="#222124"
+  [noiseIntensity]="0.3"
+  [rotation]="-0.2"
+></app-background-canvas>
+
+
+<app-text-trail
+    text="Hyperspace"
+    fontFamily="Orbitron, sans-serif"
+    [fontWeight]="900"
+    [letterSpacing]="30"
+    startColor="#cccccc"
+    [rgbPersistFactor]="0.96"
+    [alphaPersistFactor]="0.99"
+    [animateColor]="false" 
+></app-text-trail>

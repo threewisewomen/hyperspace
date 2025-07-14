@@ -1,0 +1,27 @@
+<div class="fixed bottom-4 left-1/2 -translate-x-1/2 h-20 flex items-center">
+  <div class="flex items-end justify-center gap-4 bg-black/40 backdrop-blur-md border border-white/20 shadow-2xl rounded-2xl p-3">
+
+    <!-- Loop through each item provided in the @Input() -->
+    <!-- We use #dockItem to make these elements available to our @ViewChildren query in the TS file -->
+    <a *ngFor="let item of items; let i = index" 
+       #dockItem
+       [routerLink]="item.route"
+       class="relative flex items-center justify-center rounded-full bg-gray-800 border border-gray-600 transition-all duration-200 ease-out will-change-transform"
+       [style.width.px]="baseItemSize"
+       [style.height.px]="baseItemSize"
+       (mouseenter)="onItemHover(i)"
+       (mouseleave)="onItemLeave()">
+       
+      <!-- The Material Icon -->
+      <mat-icon class="transition-transform duration-200" [style.transform]="'scale(' + ((baseItemSize + (magnification - baseItemSize) * (hoveredItemIndex === i ? 1 : 0)) / (baseItemSize * 2)) + ')'">{{ item.icon }}</mat-icon>
+      
+      <!-- The Hover Label, with Angular Animations -->
+      <div 
+        [@labelAnimation]="hoveredItemIndex === i ? 'visible' : 'hidden'"
+        class="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-md bg-gray-900 border border-gray-600 text-white text-xs whitespace-nowrap shadow-lg">
+        {{ item.label }}
+      </div>
+      
+    </a>
+  </div>
+</div>

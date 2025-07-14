@@ -1,0 +1,27 @@
+<div class="h-screen flex flex-col bg-gray-100">
+  <mat-toolbar color="primary" class="flex-shrink-0 shadow-md">
+    <!-- Add a link to go back to the home page -->
+    <span class="cursor-pointer" routerLink="/">Project Hyperspace - EEG Visualization Engine</span>
+  </mat-toolbar>
+
+  <div class="flex-grow p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+    <!-- Control Panel Column -->
+    <div class="md:col-span-1">
+      <mat-card>
+        <mat-card-content class="p-4">
+          <h2 class="text-xl font-semibold mb-4">Controls</h2>
+          <app-file-uploader></app-file-uploader>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Visualization Column -->
+    <div class="md:col-span-2">
+      <mat-card class="h-full">
+        <mat-card-content class="h-full">
+          <app-visualization-canvas [vertices]="currentVertices"></app-visualization-canvas>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

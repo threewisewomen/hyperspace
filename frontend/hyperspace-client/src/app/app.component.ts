@@ -1,49 +1,37 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatCardModule } from '@angular/material/card';
 
-import { VisualizationCanvasComponent } from './components/visualization-canvas/visualization-canvas.component';
-import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
-import { SignalrService } from './services/signalr.service';
-import { ShapeData } from './services/eeg-api.service';
-import { Subscription } from 'rxjs';
+// Import our new DockComponent and its data interface
+import { DockComponent, DockItem } from './components/dock/dock.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     CommonModule,
-    MatToolbarModule,
-    MatCardModule,
-    VisualizationCanvasComponent,
-    FileUploaderComponent
+    RouterOutlet,
+    DockComponent // Add DockComponent to the imports
   ],
-  templateUrl: './app.component.html', // Pointing to a separate HTML file now
+  // Use templateUrl to point to the external HTML file
+  templateUrl: './app.component.html',
+  // Use styleUrls to point to the external SCSS file
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
-  public currentVertices: number[] = [];
-  private shapeDataSubscription?: Subscription;
-
-  // We only need the SignalR service now for this logic
-  constructor(private signalrService: SignalrService) {}
-
-  ngOnInit(): void {
-    // Start the persistent SignalR connection when the app loads
-    this.signalrService.startConnection();
-
-    // Subscribe to the shape data Subject from the SignalR service
-    this.shapeDataSubscription = this.signalrService.shapeDataReceived
-      .subscribe((data: ShapeData) => {
-        // When new data arrives, update the property bound to our canvas
-        this.currentVertices = data.vertices;
-      });
-  }
-
-  ngOnDestroy(): void {
-    // Clean up the subscription when the component is destroyed
-    this.shapeDataSubscription?.unsubscribe();
-  }
+export class AppComponent {
+  // Define the data for our dock items here
+  dockItems: DockItem[] = [
+    {
+      id: 'home',
+      label: 'Home',
+      icon: 'home', // Material Icon name for 'home'
+      route: '/' // Route to the landing page
+    },
+    {
+      id: 'visualizer',
+      label: 'Visualizer',
+      icon: 'bubble_chart', // Material Icon name for a 'visualization' concept
+      route: '/visualizer' // Route to the main tool
+    }
+  ];
 }
